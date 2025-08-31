@@ -1,0 +1,6 @@
+# Prevent generator from creating these files:
+**/.gitignore
+**/.npmignore
+**/git_push.sh
+**/.openapi-generator-ignore
+**/VERSION

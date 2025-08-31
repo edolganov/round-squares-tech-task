@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "app_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "operationId": "auth_confirmAuth",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResp"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Login to system",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/round": {
+      "post": {
+        "operationId": "round_createRound",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoundReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Round"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create round",
+        "tags": [
+          "Round"
+        ]
+      }
+    },
+    "/v1/round/top": {
+      "get": {
+        "operationId": "round_getTopRounds",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Round"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get actual rounds",
+        "tags": [
+          "Round"
+        ]
+      }
+    },
+    "/v1/round/tap": {
+      "post": {
+        "operationId": "round_tapToRound",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TapReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TapResp"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add tap to active round",
+        "tags": [
+          "Round"
+        ]
+      }
+    },
+    "/v1/round/info": {
+      "get": {
+        "operationId": "round_getRoundInfo",
+        "parameters": [
+          {
+            "name": "roundId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRoundInfoResp"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get round info for current user",
+        "tags": [
+          "Round"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "P2EX API",
+    "description": "",
+    "version": "",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Enter your Bearer token"
+      }
+    },
+    "schemas": {
+      "LoginReq": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "psw": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "login",
+          "psw"
+        ]
+      },
+      "LoginResp": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "CreateRoundReq": {
+        "type": "object",
+        "properties": {
+          "visibleTime": {
+            "type": "string"
+          }
+        }
+      },
+      "Round": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "visibleAt": {
+            "type": "string"
+          },
+          "startAt": {
+            "type": "string"
+          },
+          "endAt": {
+            "type": "string"
+          },
+          "winner": {
+            "type": "string"
+          },
+          "winnerScore": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "visibleAt",
+          "startAt",
+          "endAt"
+        ]
+      },
+      "TapReq": {
+        "type": "object",
+        "properties": {
+          "roundId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "roundId"
+        ]
+      },
+      "TapResp": {
+        "type": "object",
+        "properties": {
+          "roundId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "roundId",
+          "status"
+        ]
+      },
+      "RoundInfo": {
+        "type": "object",
+        "properties": {
+          "roundId": {
+            "type": "string"
+          },
+          "userScore": {
+            "type": "number"
+          },
+          "winner": {
+            "type": "string"
+          },
+          "winnerScore": {
+            "type": "number"
+          },
+          "totalScore": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "roundId",
+          "userScore"
+        ]
+      },
+      "GetRoundInfoResp": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/RoundInfo"
+          }
+        }
+      }
+    }
+  }
+}

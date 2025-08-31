@@ -1,0 +1,17 @@
+{
+  "generatorName": "typescript-fetch",
+  "ignoreFileOverride": "./config/api/.openapi-generator-ignore",
+  "inputSpec": "./config/api/api.json",
+  "outputDir": "./src/generated/api",
+  "withInterfaces": "true",
+  "typescriptThreePlus": "true",
+  "withSeparateModelsAndApi": "true",
+  "useSingleRequestParameter": "false",
+  "apiPackage": "api",
+  "modelPackage": "model",
+  "taggedUnions": "true",
+  "modelPropertyNaming": "original",
+  "enumPropertyNaming": "original",
+  "supportsES6": "true",
+  "legacyDiscriminatorBehavior": "false"
+}

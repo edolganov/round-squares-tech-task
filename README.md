@@ -9,6 +9,7 @@
     * [Server](#server-1)
     * [E2E Тесты](#e2e-тесты)
     * [Front](#front-1)
+  * [Тест RPC](#тест-rpc)
 <!-- TOC -->
 
 

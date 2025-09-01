@@ -102,3 +102,31 @@ $ npm run dev
 - JWT токен авторизации пока что хранится в localStorage для простоты демонстрации проекта
 - Во время игры тапы юзера сохраняются в localStorage для интерактивности
 - После игры подтягиваются данные из сервера, локальные данные тапов удаляются
+
+## Тест RPC
+- Тест на локальной машине с локальной БД (RAM 32GB, CPU Intel 12 i7)
+- Через [ApacheBench](https://en.wikipedia.org/wiki/ApacheBench)
+- Команда вызова: `ab -n 10000 -c 100 "http://localhost:3000/v1/round/tap?..."` с подстановкой валидного jwt-token
+- Результаты:
+```bash
+Concurrency Level:      100
+Time taken for tests:   10.421 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Requests per second:    959.58 [#/sec] (mean)
+Time per request:       104.212 [ms] (mean)
+Time per request:       1.042 [ms] (mean, across all concurrent requests)
+Transfer rate:          287.69 [Kbytes/sec] received
+
+Percentage of the requests served within a certain time (ms)
+  50%     99
+  66%    107
+  75%    112
+  80%    114
+  90%    123
+  95%    137
+  98%    151
+  99%    177
+ 100%    243 (longest request)
+```
